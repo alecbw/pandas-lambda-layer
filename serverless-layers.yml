@@ -5,6 +5,7 @@ service: layers-stack
 provider:
   name: aws
   runtime: python3.7
+#  profile: foobar
   stage: prod
   region: us-west-1
   versionFunctions: true
@@ -20,16 +21,8 @@ layers:
     compatibleRuntimes:
       - python3.7
     allowedAccounts:
-      - '*' # ALL accounts!
-  social_platform_wrappers:
-    path: social_platform_wrappers
-    name: Twitter-StackOverflow-Reddit
-    description: Python 3.7; tweepy (3.8.0) praw (6.5.1) StackAPI (0.1.12). Includes dependencies six, certifi, chardet, idna, urllib3, requests, oauthlib, requests-oauthlib, PySocks, update-checker, websocket-client. - ${env:SLS_DESCRIPTION_TIMESTAMP}
-    retain: true
-    compatibleRuntimes:
-      - python3.7
-    allowedAccounts:
-      - '*'
+      - ${env:AWS_ACCOUNT_ID}
+
   requests:
     path: requests
     name: Requests-BS4
@@ -38,34 +31,8 @@ layers:
     compatibleRuntimes:
       - python3.7
     allowedAccounts:
-      - '*'
-  google-auth:
-    path: google_auth
-    name: Google-Auth
-    description: Python 3.7; google-auth (1.14.1), gspread (3.6.0), PyJWT (1.7.1). Also includes dependencies cachetools, certifi, chardet, oauthlib, httplib2, idna, pyasn1, pyasn1-modules, requests, requests-oauthlib, rsa, six, urllib3. - ${env:SLS_DESCRIPTION_TIMESTAMP}
-    retain: true
-    compatibleRuntimes:
-      - python3.7
-    allowedAccounts:
-      - '*'
-  news:
-    path: news
-    name: news
-    description: Python 3.7; newspaper3k (0.2.8), newscatcher (0.1.0). Buncha dependencies. - ${env:SLS_DESCRIPTION_TIMESTAMP}
-    retain: true
-    compatibleRuntimes:
-      - python3.7
-    allowedAccounts:
-      - '*'
-  selenium:
-    path: selenium
-    name: Selenium
-    description: Python 3.7; Selenium (3.141.0), ChromeDriver (2.37), Serverless Chrome (v1.0.0.41) - ${env:SLS_DESCRIPTION_TIMESTAMP}
-    retain: true
-    compatibleRuntimes:
-      - python3.7
-    allowedAccounts:
-      - '*'
+      - ${env:AWS_ACCOUNT_ID}
+
   monitoring:
     path: monitoring
     name: Monitoring
@@ -74,7 +41,58 @@ layers:
     compatibleRuntimes:
       - python3.7
     allowedAccounts:
-      - '*'
+      - ${env:AWS_ACCOUNT_ID}
+
+  awswrangler:
+    path: awswrangler
+    name: awswrangler
+    description: Python 3.7; awswrangler (2.0.1), plus deps pyarrow (2.0.0), pg8000 (1.16.6), redshift-connector (2.0.872), PyMySQL (0.10.1) - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - ${env:AWS_ACCOUNT_ID}
+
+  social_platform_wrappers:
+    path: social_platform_wrappers
+    name: Twitter-StackOverflow-Reddit
+    description: Python 3.7; tweepy (3.8.0), twint (2.1.20), praw (6.5.1), StackAPI (0.1.12). Includes dependencies six, certifi, chardet, idna, urllib3, requests, oauthlib, requests-oauthlib, PySocks, update-checker, websocket-client. - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - ${env:AWS_ACCOUNT_ID}
+
+  google-auth:
+    path: google_auth
+    name: Google-Auth
+    description: Python 3.7; google-auth (1.14.1), gspread (3.6.0), PyJWT (1.7.1). Also includes dependencies cachetools, certifi, chardet, oauthlib, httplib2, idna, pyasn1, pyasn1-modules, requests, requests-oauthlib, rsa, six, urllib3. - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - ${env:AWS_ACCOUNT_ID}
+
+  news:
+    path: news
+    name: news
+    description: Python 3.7; newspaper3k (0.2.8), newscatcher (0.1.0). Buncha dependencies. - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - ${env:AWS_ACCOUNT_ID}
+
+  selenium:
+    path: selenium
+    name: Selenium
+    description: Python 3.7; Selenium (3.141.0), ChromeDriver (2.37), Serverless Chrome (v1.0.0.41) - ${env:SLS_DESCRIPTION_TIMESTAMP}
+    retain: true
+    compatibleRuntimes:
+      - python3.7
+    allowedAccounts:
+      - ${env:AWS_ACCOUNT_ID}
+
   databases:
     path: databases
     name: Databases
@@ -83,4 +101,4 @@ layers:
     compatibleRuntimes:
       - python3.7
     allowedAccounts:
-      - '*'
+      - ${env:AWS_ACCOUNT_ID}

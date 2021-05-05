@@ -1,0 +1,11 @@
+# run without dragging in dependencies or you will get a bloated layer with Pandas and Numpy too (which I prefer to keep in a separate Layer)
+awswrangler==2.0.1
+
+# dependencies
+pyarrow==2.0.0
+pg8000==1.16.6
+redshift-connector==2.0.872
+PyMySQL==0.10.1
+
+# depedencies of dependencies
+scramp==1.2.0
